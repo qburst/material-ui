@@ -30,7 +30,7 @@ function moduleIDToJSIdentifier(moduleID) {
 
 const componentPackageMapping = {
   'material-ui': {},
-  base: {},
+  'base-ui': {},
   'joy-ui': {},
 };
 
@@ -44,7 +44,7 @@ const packages = [
     ],
   },
   {
-    product: 'base',
+    product: 'base-ui',
     paths: [path.join(__dirname, '../../packages/mui-base/src')],
   },
   {
@@ -219,7 +219,9 @@ module.exports = async function demoLoader() {
   );
 
   componentNames.forEach((componentName) => {
-    const moduleID = path.join(this.rootContext, 'src', componentName).replace(/\\/g, '/');
+    const moduleID = path
+      .join(this.rootContext, 'src', componentName.replace(/^docs\/src/, ''))
+      .replace(/\\/g, '/');
 
     components[moduleID] = componentName;
     componentModuleIDs.add(moduleID);
